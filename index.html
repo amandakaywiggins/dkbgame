@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Part 2 </title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+</head>
+
+<body>
+  <div id="header">
+    <h1>Dragons, Knights, Ballista</h1>
+  </div>
+
+  <div id="instructions">
+      <h1>Oh no! Dragons are attacking the kingdom!</h1> 
+        <hr>
+        <p>
+        Chose a side!
+        <br>
+        Dragon defeats Knight, Knight controls Ballista, and Ballista defeats Dragon.
+        <br> 
+        Press d for dragon, b for ballista, or k for knight.
+      </p>
+    </div>
+
+  <div id="game">
+    <h1>You Chose: <span id="userText"></span></h1>
+    <h1> The Computer Chose: <span id="computerText"></span></h1>
+    <h1>Wins: <span id="winsText"></span></h1>
+    <h1>Losses: <span id="lossesText"></span></h1>
+    <h1>Ties: <span id="tiesText"></span></h1>
+  </div>
+
+  <script type="text/javascript">
+
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerChoices = ["d", "b", "k"];
+    var userText = document.getElementById("userText");
+    var computerText = document.getElementById("computerText");
+
+    // Display zero at start
+    var wins = 0;
+    var losses = 0;
+    var ties = 0;
+
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+
+      // Determines which key was pressed.
+      var userGuess = event.key;
+      if (userGuess == 'd' || userGuess == 'b' || userGuess == 'k') {
+      userText.textContent = event.key;
+      } 
+      else { 
+      userText.textContent = "";
+      }    
+
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      computerText.textContent = computerGuess;  
+
+      // Functions to determine winner
+        if(userGuess == computerGuess)              
+            {ties++;  
+            tiesText.textContent = ties;}     
+            else if ((userGuess == 'd' && computerGuess == 'b') || (userGuess == 'k' && computerGuess == 'd') || (userGuess == 'b' && computerGuess == 'k'))     
+            {losses++;        
+            lossesText.textContent = losses;}     
+            else if ((userGuess == 'd' && computerGuess == 'k') || (userGuess == 'b' && computerGuess == 'd') || (userGuess == 'k' && computerGuess == 'b'))
+            {wins++;       
+            winsText.textContent = wins;} 
+
+    };
+  </script>
+
+</body>
